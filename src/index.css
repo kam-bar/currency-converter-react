@@ -12,6 +12,11 @@ body {
     font-family: "Montserrat", sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f7;
+    min-height: 100vh;
+    background-image: url("./images/background-currency.jpeg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     word-break: break-word;
 }
