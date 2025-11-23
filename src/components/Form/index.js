@@ -1,9 +1,20 @@
 import { useState } from "react";
 import "./Form.css";
+import { calculateResult } from "../../currencies";
 
-const Form = ({ calculate, result, currencies }) => {
+const Form = ({ currencies }) => {
     const [amount, setAmount] = useState("");
     const [currency, setCurrency] = useState(currencies[0].short);
+    const [result, setResult] = useState(null);
+
+    const calculate = (amount, currency) => {
+        const calculation = calculateResult(amount, currency, currencies);
+        setResult({
+            sourceAmount: +amount,
+            targetAmount: calculation,
+            currency: currency,
+        });
+    };
 
     const onFormSubmit = (event) => {
         event.preventDefault();
@@ -17,7 +28,7 @@ const Form = ({ calculate, result, currencies }) => {
         <form className="form" onSubmit={onFormSubmit}>
             <fieldset className="form__fieldset">
                 <label className="form__label">
-                    <span className="form__labelText">Chcę wymienić:</span>
+                    <span className="form__labelText">Chcę wymienić (PLN):</span>
                     <input
                         className="form__field"
                         type="number"
