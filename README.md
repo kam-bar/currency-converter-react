@@ -8,7 +8,8 @@ https://kam-bar.github.io/currency-converter-react
 
 ## Description
 
-Simple currency converter application (PLN → EUR/GBP/USD) built with React.
+A simple currency converter that allows you to convert an amount in PLN to EUR, GBP or USD.  
+The application is built with React and includes a live clock displayed in the top-right corner of the screen.
 
 ## Technologies
 

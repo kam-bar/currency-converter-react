@@ -1,0 +1,25 @@
+.clock {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+
+    font-family: "Courier New", monospace;
+    font-size: 0.9rem;
+    color: #666;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .clock {
+        top: 5px;
+        right: 5px;
+        font-size: 0.75rem;
+        padding: 4px 6px;
+        max-width: 100%;
+        line-height: 1.2;
+        text-align: right;
+    }
+}
