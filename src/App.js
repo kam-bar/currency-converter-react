@@ -8,11 +8,15 @@ import Clock from "./components/Clock/Clock";
 function App() {
     return (
         <Container>
-            <Clock />
             <Header title="Kalkulator walutowy" />
             <Section
                 title="Wymiana waluty"
-                body={<Form currencies={currencies} />}
+                body={
+                    <>
+                        <Clock />
+                        <Form currencies={currencies} />
+                    </>
+                }
             />
         </Container>
     );
