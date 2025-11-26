@@ -13,12 +13,19 @@ The application is built with React and includes a live clock displayed in the t
 
 ## Technologies
 
-- HTML
-- CSS (BEM)
-- JavaScript (ES6+)
-- React
+- React 18
 - Create React App
+- Styled Components
+- Custom Hooks (useCurrentDate)
+- JavaScript ES6+
 - GitHub Pages
+
+## Features
+
+- Convert PLN to EUR, GBP, or USD
+- Live clock updated every second
+- Responsive design
+- Form validation
 
 ## Available Scripts
 
