@@ -2,7 +2,7 @@ import Container from "./components/Container";
 import Header from "./components/Header";
 import Section from "./components/Section";
 import Form from "./components/Form";
-import Clock from "./components/Clock/Clock";
+import Clock from "./components/Clock";
 import Loading from "./components/Loading";
 import ErrorMessage from "./components/Error";
 import { useRatesData } from "./useRatesData";
