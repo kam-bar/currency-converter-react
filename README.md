@@ -16,16 +16,25 @@ The application is built with React and includes a live clock displayed in the t
 - React 18
 - Create React App
 - Styled Components
-- Custom Hooks (useCurrentDate)
+- Custom Hooks
+- Fetch API
+- Currency API (currencyapi.com)
 - JavaScript ES6+
 - GitHub Pages
 
 ## Features
 
-- Convert PLN to EUR, GBP, or USD
+- Convert PLN to multiple currencies
+- Real-time exchange rates from Currency API
+- Loading state with user-friendly message
+- Error handling for network issues
 - Live clock updated every second
 - Responsive design
 - Form validation
+
+## API
+
+Exchange rates are fetched from [currencyapi.com](https://currencyapi.com/) and updated in real-time.
 
 ## Available Scripts
 

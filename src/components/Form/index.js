@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { calculateResult } from "../../currencies";
 
 const StyledForm = styled.form`
     margin: 0;
@@ -11,6 +10,14 @@ const Fieldset = styled.fieldset`
     border: none;
     padding: 0;
     margin: 0;
+`;
+
+const InfoText = styled.p`
+    font-size: 0.9rem;
+    color: ${({ theme }) => theme.colors.silverChalice};
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 500;
 `;
 
 const Label = styled.label`
@@ -104,18 +111,18 @@ const ResultValue = styled.strong`
     color: ${({ theme }) => theme.colors.almostBlack};
 `;
 
-const Form = ({ currencies }) => {
+const Form = ({ rates, date }) => {
     const [amount, setAmount] = useState("");
-    const [currency, setCurrency] = useState(currencies[0].short);
+    const [currency, setCurrency] = useState("EUR");
     const [result, setResult] = useState(null);
 
-    const calculate = (amount, currency) => {
-        const calculation = calculateResult(amount, currency, currencies);
-        setResult({
-            sourceAmount: +amount,
-            targetAmount: calculation,
-            currency: currency,
-        });
+    if (!rates) {
+        return null;
+    }
+
+    const calculateResult = (amount, currency) => {
+        const rate = rates[currency];
+        return (amount / rate).toFixed(2);
     };
 
     const onFormSubmit = (event) => {
@@ -123,54 +130,63 @@ const Form = ({ currencies }) => {
         if (!amount || amount <= 0) {
             return;
         }
-        calculate(amount, currency);
+
+        const calculatedResult = calculateResult(Number(amount), currency);
+        setResult({
+            sourceAmount: Number(amount),
+            targetAmount: calculatedResult,
+            currency: currency,
+        });
     };
 
     return (
-        <StyledForm onSubmit={onFormSubmit}>
-            <Fieldset>
-                <Label>
-                    <LabelText>Chcę wymienić (PLN):</LabelText>
-                    <Field
-                        type="number"
-                        name="amount"
-                        placeholder="Wpisz kwotę w PLN"
-                        step="any"
-                        min="0.01"
-                        required
-                        autoFocus
-                        value={amount}
-                        onChange={({ target }) => setAmount(target.value)}
-                    />
-                </Label>
-                <Label>
-                    <LabelText>Wybierz walutę:</LabelText>
-                    <Select
-                        name="currency"
-                        value={currency}
-                        onChange={({ target }) => setCurrency(target.value)}
-                    >
-                        {currencies.map((currency) => (
-                            <option key={currency.short} value={currency.short}>
-                                {currency.name}
-                            </option>
-                        ))}
-                    </Select>
-                </Label>
-                <Button type="submit">Przelicz! 💰</Button>
+        <>
+            <InfoText>
+                Kursy walut pobrano dnia: <strong>{date}</strong>
+            </InfoText>
+            <StyledForm onSubmit={onFormSubmit}>
+                <Fieldset>
+                    <Label>
+                        <LabelText>Chcę wymienić (PLN):</LabelText>
+                        <Field
+                            type="number"
+                            name="amount"
+                            placeholder="Wpisz kwotę w PLN"
+                            step="any"
+                            min="0.01"
+                            required
+                            autoFocus
+                            value={amount}
+                            onChange={({ target }) => setAmount(target.value)}
+                        />
+                    </Label>
+                    <Label>
+                        <LabelText>Wybierz walutę:</LabelText>
+                        <Select
+                            name="currency"
+                            value={currency}
+                            onChange={({ target }) => setCurrency(target.value)}
+                        >
+                            {Object.keys(rates).map((curr) => (
+                                <option key={curr} value={curr}>
+                                    {curr}
+                                </option>
+                            ))}
+                        </Select>
+                    </Label>
+                    <Button type="submit">Przelicz! 💰</Button>
 
-                <Result>
-                    Po wymianie otrzymasz:{" "}
-                    <ResultValue>
-                        {result
-                            ? `${result.targetAmount.toFixed(2)} ${
-                                  result.currency
-                              }`
-                            : "N/A"}
-                    </ResultValue>
-                </Result>
-            </Fieldset>
-        </StyledForm>
+                    <Result>
+                        Po wymianie otrzymasz:{" "}
+                        <ResultValue>
+                            {result
+                                ? `${result.targetAmount} ${result.currency}`
+                                : "N/A"}
+                        </ResultValue>
+                    </Result>
+                </Fieldset>
+            </StyledForm>
+        </>
     );
 };
 
