@@ -21,9 +21,9 @@ function App() {
                         {ratesData.state === "loading" && <Loading />}
                         {ratesData.state === "error" && <ErrorMessage />}
                         {ratesData.state === "success" && (
-                            <Form 
-                                rates={ratesData.rates} 
-                                date={ratesData.date} 
+                            <Form
+                                rates={ratesData.rates}
+                                date={ratesData.date}
                             />
                         )}
                     </>
