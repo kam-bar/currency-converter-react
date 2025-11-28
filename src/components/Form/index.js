@@ -23,7 +23,7 @@ const Form = ({ rates, date }) => {
 
     const calculateResult = (amount, currency) => {
         const rate = rates[currency];
-        return (amount / rate).toFixed(2);
+        return (amount * rate).toFixed(2);
     };
 
     const onFormSubmit = (event) => {
